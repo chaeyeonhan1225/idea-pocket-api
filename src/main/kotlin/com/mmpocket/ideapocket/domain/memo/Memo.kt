@@ -26,12 +26,6 @@ class Memo(
     @Column(length = 2048, nullable = false)
     var content: String = param.content
 
-    @Version
-    var version: Int = 0
-
-
-        private set
-
     @Column(nullable = false)
     var status: CommonState = CommonState.ACTIVE
 

@@ -25,8 +25,8 @@ class MemoController(
     }
 
     @GetMapping("/{id}")
-    fun findMemoById(@PathVariable id: String) {
-        // TODO: findById 구현
+    fun findMemoById(@PathVariable id: String): Memo {
+        return provider.findById(id)
     }
 
     @PostMapping

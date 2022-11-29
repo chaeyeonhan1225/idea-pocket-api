@@ -13,15 +13,12 @@ import org.springframework.transaction.annotation.Transactional
 @Transactional
 class UserApplication(
     private val repository: UserRepository,
-    // private val passwordEncoder: PasswordEncoder,
     private val sequenceGenerator: SequenceGenerator
 ) {
 
     fun createUser(param: UserParam): User {
         val userId = UserId(sequenceGenerator.generate(User::class.java.simpleName))
         val user = User(id = userId, param = param)
-        // println("encodedPassword = " + passwordEncoder.encode(param.password))
-        // user.setPassword(passwordEncoder.encode(param.password))
         return repository.save(user)
     }
 }
