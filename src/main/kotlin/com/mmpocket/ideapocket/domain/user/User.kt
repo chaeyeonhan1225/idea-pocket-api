@@ -1,12 +1,14 @@
 package com.mmpocket.ideapocket.domain.user
 
 import com.mmpocket.ideapocket.domain.CommonState
+import org.hibernate.annotations.Where
 import org.springframework.security.core.GrantedAuthority
 import org.springframework.security.core.userdetails.UserDetails
 import javax.persistence.*
 
 @Entity
 @Table(name = "MemoUser")
+@Where(clause = "status > 0")
 class User(
     @EmbeddedId
     @AttributeOverride(name = "value", column = Column(name = "id", nullable = false))

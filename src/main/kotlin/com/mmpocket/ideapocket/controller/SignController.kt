@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
+@RequestMapping("v1")
 class SignController(
     private val application: UserApplication,
     private val provider: UserProvider,

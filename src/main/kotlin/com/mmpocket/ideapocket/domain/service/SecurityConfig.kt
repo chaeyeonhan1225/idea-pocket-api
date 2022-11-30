@@ -46,9 +46,6 @@ class SecurityConfig(
              .passwordEncoder(passwordEncoder())
     }
 
-//    @Bean
-//    fun userDetailsService() = UserDetailsService()
-
     @Bean
     fun passwordEncoder(): PasswordEncoder {
         return BCryptPasswordEncoder()
@@ -58,11 +55,10 @@ class SecurityConfig(
     fun filterChain(http: HttpSecurity): SecurityFilterChain {
         http.csrf().disable()
 
-        http.authorizeRequests()
-            .antMatchers("/sign-up", "/sign-in").permitAll()
-            .antMatchers("/**").authenticated()
-//            .and()
-//            .formLogin().loginPage("/log-in")
+//        http.authorizeRequests()
+//            .antMatchers("/sign-up", "/sign-in").permitAll()
+//            .antMatchers("/**").authenticated()
+
         return http.build()
     }
 }

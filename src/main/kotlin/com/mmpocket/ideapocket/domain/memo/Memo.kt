@@ -2,9 +2,11 @@ package com.mmpocket.ideapocket.domain.memo
 
 import com.mmpocket.ideapocket.domain.CommonState
 import com.mmpocket.ideapocket.domain.user.UserId
+import org.hibernate.annotations.Where
 import javax.persistence.*
 
 @Entity
+@Where(clause = "status > 0")
 class Memo(
     @EmbeddedId
     @AttributeOverride(name = "value", column = Column(name = "id", nullable = false))

@@ -7,7 +7,7 @@ import com.mmpocket.ideapocket.domain.directory.DirectoryParam
 import org.springframework.web.bind.annotation.*
 
 @RestController
-@RequestMapping("directories")
+@RequestMapping("v1/directories")
 class DirectoryController(
     private val provider: DirectoryProvider,
     private val service: DirectoryApplication

@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
-@RequestMapping("memos")
+@RequestMapping("v1/memos")
 class MemoController(
     private val provider: MemoProvider,
     private val service: MemoApplication

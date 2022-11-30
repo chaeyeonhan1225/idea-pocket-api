@@ -1,6 +1,7 @@
 server:
   port: 3000
-spring:
+  servlet:
+    context-path: /api
   jpa:
     hibernate:
       ddl-auto: create
@@ -10,3 +11,8 @@ spring:
     url: jdbc:mysql://localhost:3306/Memo?serverTimezone=UTC&useCursors=false&sendStringParametersAsUnicode=false&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&autoReconnect=true&useSSL=false
     username: root
     password:
+springdoc:
+  paths-to-match:
+    - /v1//memos/**
+    - /v1//directories/**
+    - /v1//users/**
