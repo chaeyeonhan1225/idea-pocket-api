@@ -8,7 +8,7 @@ import javax.persistence.*
 
 @Entity
 @Table(name = "MemoUser")
-@Where(clause = "status > 0")
+// @Where(clause = "status > 0")
 class User(
     @EmbeddedId
     @AttributeOverride(name = "value", column = Column(name = "id", nullable = false))

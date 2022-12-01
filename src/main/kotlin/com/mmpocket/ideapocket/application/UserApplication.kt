@@ -19,6 +19,7 @@ class UserApplication(
     fun createUser(param: UserParam): User {
         val userId = UserId(sequenceGenerator.generate(User::class.java.simpleName))
         val user = User(id = userId, param = param)
+        println("user sign up!")
         return repository.save(user)
     }
 }

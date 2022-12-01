@@ -1,10 +1,8 @@
 package com.mmpocket.ideapocket.domain.service
 
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.annotation.Bean
-import org.springframework.context.annotation.Configuration
 import org.springframework.security.authentication.AuthenticationManager
-import org.springframework.security.config.BeanIds
+import org.springframework.security.authentication.AuthenticationProvider
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
@@ -18,8 +16,17 @@ import org.springframework.security.web.SecurityFilterChain
 @EnableWebSecurity
 @EnableMethodSecurity
 class SecurityConfig(
-    private val userDetailsService: UserDetailsService
+    private val authenticationProvider: CustomAuthenticationProvider
 ) {
+    @Bean
+    fun authManager(http: HttpSecurity): AuthenticationManager? {
+        val authenticationManagerBuilder = http.getSharedObject(
+            AuthenticationManagerBuilder::class.java
+        )
+        authenticationManagerBuilder.authenticationProvider(authenticationProvider)
+        return authenticationManagerBuilder.build()
+    }
+
 
 //    @Bean
 //    fun authenticationManager(
@@ -40,24 +47,26 @@ class SecurityConfig(
 //    }
 
 
-    fun configureAuthentication(authenticationManagerBuilder: AuthenticationManagerBuilder) {
-        authenticationManagerBuilder
-             .userDetailsService(userDetailsService)
-             .passwordEncoder(passwordEncoder())
-    }
-
-    @Bean
-    fun passwordEncoder(): PasswordEncoder {
-        return BCryptPasswordEncoder()
-    }
+//    fun configureAuthentication(authenticationManagerBuilder: AuthenticationManagerBuilder) {
+//        authenticationManagerBuilder
+//             .userDetailsService(userDetailsService)
+//             .passwordEncoder(passwordEncoder())
+//    }
 
     @Bean
     fun filterChain(http: HttpSecurity): SecurityFilterChain {
         http.csrf().disable()
 
-//        http.authorizeRequests()
-//            .antMatchers("/sign-up", "/sign-in").permitAll()
-//            .antMatchers("/**").authenticated()
+        http.authorizeRequests()
+            .antMatchers("/v1/sign-up", "/v1/sign-in").permitAll()
+            .anyRequest().authenticated()
+            .and()
+            .formLogin()
+            .loginProcessingUrl("/v1/sign-in")
+            .permitAll()
+            .and()
+            .logout()
+            .permitAll()
 
         return http.build()
     }

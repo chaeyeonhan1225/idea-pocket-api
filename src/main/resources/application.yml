@@ -1,18 +1,26 @@
 server:
   port: 3000
-  servlet:
-    context-path: /api
+  # servlet:
+    # context-path: /api
+spring:
   jpa:
     hibernate:
       ddl-auto: create
     show-sql: true
+#    properties:
+#      hibernate:
+#        dialect: org.hibern
+    database: mysql
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/Memo?serverTimezone=UTC&useCursors=false&sendStringParametersAsUnicode=false&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&autoReconnect=true&useSSL=false
     username: root
     password:
+
 springdoc:
   paths-to-match:
     - /v1//memos/**
     - /v1//directories/**
     - /v1//users/**
+  swagger-ui:
+    path: idea-pocket.html # swagger-ui.html이 아닌 idea-pocket.html로 접근 가능

@@ -8,7 +8,7 @@ import org.springframework.data.repository.query.Param
 import org.springframework.stereotype.Repository
 
 @Repository
-interface DataBaseSequenceRepository: CrudRepository<DatabaseSequence, String> {
+interface DataBaseSequenceRepository: JpaRepository<DatabaseSequence, String> {
     @Modifying
     @Query("Update DatabaseSequence set seq = seq + :count Where id = :id")
     fun updateSeq(@Param("id") id: String, @Param("count") count: Long)

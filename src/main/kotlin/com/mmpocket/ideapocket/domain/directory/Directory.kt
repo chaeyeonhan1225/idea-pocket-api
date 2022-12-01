@@ -4,14 +4,10 @@ import com.mmpocket.ideapocket.domain.CommonState
 import com.mmpocket.ideapocket.domain.memo.DirectoryId
 import com.mmpocket.ideapocket.domain.user.UserId
 import org.hibernate.annotations.Where
-import javax.persistence.AttributeOverride
-import javax.persistence.Column
-import javax.persistence.Embedded
-import javax.persistence.EmbeddedId
-import javax.persistence.Entity
+import javax.persistence.*
 
 @Entity
-@Where(clause = "status > 0")
+// @Where(clause = "status > 0")
 class Directory(
     @EmbeddedId
     @AttributeOverride(name = "value", column = Column(name = "id", nullable = false))

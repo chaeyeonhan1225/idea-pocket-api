@@ -25,13 +25,13 @@ class SignController(
         return application.createUser(userParam)
     }
 
-    @PostMapping("/sign-in")
-    fun signIn(@RequestBody param: UserLoginParam): Boolean {
-        val user = provider.findByEmail(email = param.email)
-
-        if (!passwordEncoder.matches(param.password, user.password)) {
-            throw RuntimeException()
-        }
-        return true
-    }
+//    @PostMapping("/sign-in")
+//    fun signIn(@RequestBody param: UserLoginParam): Boolean {
+//        val user = provider.findByEmail(email = param.email)
+//
+//        if (!passwordEncoder.matches(param.password, user.password)) {
+//            throw RuntimeException()
+//        }
+//        return true
+//    }
 }

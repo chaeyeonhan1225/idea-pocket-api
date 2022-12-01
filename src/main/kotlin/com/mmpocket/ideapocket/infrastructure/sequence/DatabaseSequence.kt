@@ -3,8 +3,10 @@ package com.mmpocket.ideapocket.infrastructure.sequence
 import javax.persistence.Column
 import javax.persistence.Entity
 import javax.persistence.Id
+import javax.persistence.Table
 
 @Entity
+@Table(name = "DatabaseSequence")
 class DatabaseSequence(
     @Id
     @Column(length = 36)
