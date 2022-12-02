@@ -27,32 +27,6 @@ class SecurityConfig(
         return authenticationManagerBuilder.build()
     }
 
-
-//    @Bean
-//    fun authenticationManager(
-//        httpSecurity: HttpSecurity,
-//        userDetailsService: UserDetailsService,
-//    ): AuthenticationManager? {
-//        val authenticationManagerBuilder = httpSecurity.getSharedObject(
-//            AuthenticationManagerBuilder::class.java
-//        )
-//        authenticationManagerBuilder.userDetailsService(userDetailsService)
-//
-//        return authenticationManagerBuilder.build()
-//    }
-
-//    @Bean(name = [BeanIds.AUTHENTICATION_MANAGER])
-//    fun authenticationManagerBean(): AuthenticationManager {
-//        return super.authenticationManagerBean()
-//    }
-
-
-//    fun configureAuthentication(authenticationManagerBuilder: AuthenticationManagerBuilder) {
-//        authenticationManagerBuilder
-//             .userDetailsService(userDetailsService)
-//             .passwordEncoder(passwordEncoder())
-//    }
-
     @Bean
     fun filterChain(http: HttpSecurity): SecurityFilterChain {
         http.csrf().disable()

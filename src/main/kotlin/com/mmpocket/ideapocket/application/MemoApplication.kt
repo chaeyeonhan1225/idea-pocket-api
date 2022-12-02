@@ -15,10 +15,9 @@ class MemoApplication(
     private val repository: MemoRepository,
     private val directoryRepository: DirectoryRepository
 ) {
-    fun createMemo(param: MemoParam): Memo {
+    fun createMemo(param: MemoParam, userId: String): Memo {
         val memoId = MemoId(sequenceGenerator.generate(Memo::class.java.simpleName))
-        val userId = UserId(value = 1)
-        val memo = Memo(id = memoId, param = param, userId = userId)
+        val memo = Memo(id = memoId, param = param, userId = UserId(value = userId.toLong()))
         repository.save(memo)
         return memo;
     }
