@@ -1,4 +1,5 @@
 package com.mmpocket.ideapocket.application
+import com.mmpocket.ideapocket.domain.directory.DirectoryRepository
 import com.mmpocket.ideapocket.domain.memo.MemoId
 import com.mmpocket.ideapocket.domain.memo.MemoParam
 import com.mmpocket.ideapocket.domain.memo.MemoRepository
@@ -15,7 +16,8 @@ import java.util.*
 class MemoApplicationTest {
     private val memoRepository = mockk<MemoRepository>()
     private val sequenceGenerator = mockk<SequenceGenerator>()
-    private val memoApplication = MemoApplication(repository = memoRepository, sequenceGenerator = sequenceGenerator)
+    private val directoryRepository = mockk<DirectoryRepository>()
+    private val memoApplication = MemoApplication(repository = memoRepository, sequenceGenerator = sequenceGenerator, directoryRepository = directoryRepository)
 
     @Test
     fun createMemoTest() {
@@ -32,7 +34,7 @@ class MemoApplicationTest {
             content = "메모 내용은 길이가 길지롱"
         )
 
-        val result = memoApplication.createMemo(testParam)
+        val result = memoApplication.createMemo(testParam, userId = "1")
 
         assertThat(result.id.value).isEqualTo(1)
         assertThat(result.title).isEqualTo(testParam.title)
@@ -53,7 +55,7 @@ class MemoApplicationTest {
             content = "메모 내용은 길이가 길지롱"
         )
 
-        val result = memoApplication.createMemo(testParam)
+        val result = memoApplication.createMemo(testParam, userId = "1")
 
         assertThat(result.id.value).isEqualTo(1)
         assertThat(result.title).isEqualTo(testParam.title)
@@ -88,7 +90,7 @@ class MemoApplicationTest {
             content = "메모 내용은 길이가 길지롱"
         )
 
-        val result = memoApplication.createMemo(testParam)
+        val result = memoApplication.createMemo(testParam, userId = "1")
 
         every {
             memoRepository.findById(MemoId(1))

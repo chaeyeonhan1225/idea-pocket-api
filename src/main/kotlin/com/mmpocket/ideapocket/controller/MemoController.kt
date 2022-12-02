@@ -5,6 +5,7 @@ import com.mmpocket.ideapocket.application.MemoProvider
 import com.mmpocket.ideapocket.application.UserProvider
 import com.mmpocket.ideapocket.domain.memo.Memo
 import com.mmpocket.ideapocket.domain.memo.MemoParam
+import org.springframework.data.domain.Page
 import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.PutMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 import java.security.Principal
 
@@ -23,9 +25,10 @@ class MemoController(
     private val service: MemoApplication
 ) {
     @GetMapping
-    fun findMemos(principal: Principal): List<Memo> {
+    fun findMemos(principal: Principal, @RequestParam page: Long?, @RequestParam size: Long?): Page<Memo> {
+        println("page = $page, size = $size")
         val userId = findUserIdByUsername(principal.name)
-        return provider.findAll(userId = userId)
+        return provider.findAll(userId = userId, page = page?.toInt(), size = size?.toInt())
     }
 
     @GetMapping("/{id}")

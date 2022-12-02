@@ -2,19 +2,23 @@ package com.mmpocket.ideapocket.controller
 
 import com.mmpocket.ideapocket.application.DirectoryApplication
 import com.mmpocket.ideapocket.application.DirectoryProvider
+import com.mmpocket.ideapocket.application.UserProvider
 import com.mmpocket.ideapocket.domain.directory.Directory
 import com.mmpocket.ideapocket.domain.directory.DirectoryParam
 import org.springframework.web.bind.annotation.*
+import java.security.Principal
 
 @RestController
 @RequestMapping("v1/directories")
 class DirectoryController(
     private val provider: DirectoryProvider,
+    private val userProvider: UserProvider,
     private val service: DirectoryApplication
 ) {
     @GetMapping
-    fun findAll(): List<Directory> {
-        return provider.findAll()
+    fun findAll(principal: Principal): List<Directory> {
+        val userId = findUserIdByUsername(principal.name)
+        return provider.findAll(userId = userId)
     }
 
     @GetMapping("/{id}")
@@ -37,4 +41,8 @@ class DirectoryController(
         return service.deleteDirectory(id)
     }
 
+    private fun findUserIdByUsername(username: String): String {
+        val user = userProvider.findByEmail(username)
+        return user.id.value.toString()
+    }
 }
