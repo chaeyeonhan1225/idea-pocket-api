@@ -1,5 +1,11 @@
 package com.mmpocket.ideapocket.domain.exception
 
+import org.springframework.http.HttpStatus
+import org.springframework.web.server.ResponseStatusException
+
 class UserNotFoundException(
     override val message: String
-): RuntimeException(message)
+): ResponseStatusException(
+    HttpStatus.BAD_REQUEST,
+    message
+)

@@ -3,8 +3,10 @@ package com.mmpocket.ideapocket.controller
 import com.mmpocket.ideapocket.application.DirectoryApplication
 import com.mmpocket.ideapocket.application.DirectoryProvider
 import com.mmpocket.ideapocket.application.UserProvider
+import com.mmpocket.ideapocket.domain.PagedList
 import com.mmpocket.ideapocket.domain.directory.Directory
 import com.mmpocket.ideapocket.domain.directory.DirectoryParam
+import org.springframework.data.domain.Page
 import org.springframework.web.bind.annotation.*
 import java.security.Principal
 
@@ -16,9 +18,9 @@ class DirectoryController(
     private val service: DirectoryApplication
 ) {
     @GetMapping
-    fun findAll(principal: Principal): List<Directory> {
+    fun findAll(principal: Principal, @RequestParam page: Int?, @RequestParam size: Int?): PagedList<Directory> {
         val userId = findUserIdByUsername(principal.name)
-        return provider.findAll(userId = userId)
+        return provider.findAll(userId = userId, page = page, size = size)
     }
 
     @GetMapping("/{id}")

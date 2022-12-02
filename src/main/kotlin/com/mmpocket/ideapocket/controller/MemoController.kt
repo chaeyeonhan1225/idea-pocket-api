@@ -3,6 +3,7 @@ package com.mmpocket.ideapocket.controller
 import com.mmpocket.ideapocket.application.MemoApplication
 import com.mmpocket.ideapocket.application.MemoProvider
 import com.mmpocket.ideapocket.application.UserProvider
+import com.mmpocket.ideapocket.domain.PagedList
 import com.mmpocket.ideapocket.domain.memo.Memo
 import com.mmpocket.ideapocket.domain.memo.MemoParam
 import org.springframework.data.domain.Page
@@ -25,10 +26,10 @@ class MemoController(
     private val service: MemoApplication
 ) {
     @GetMapping
-    fun findMemos(principal: Principal, @RequestParam page: Long?, @RequestParam size: Long?): Page<Memo> {
+    fun findMemos(principal: Principal, @RequestParam page: Int?, @RequestParam size: Int?): PagedList<Memo> {
         println("page = $page, size = $size")
         val userId = findUserIdByUsername(principal.name)
-        return provider.findAll(userId = userId, page = page?.toInt(), size = size?.toInt())
+        return provider.findAll(userId = userId, page = page, size = size)
     }
 
     @GetMapping("/{id}")
