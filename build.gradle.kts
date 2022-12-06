@@ -32,6 +32,7 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     implementation("org.springframework.boot:spring-boot-starter-security")
     implementation("org.springdoc:springdoc-openapi-ui:1.6.9")
+    implementation("io.jsonwebtoken:jjwt:0.9.1")
     compileOnly("org.projectlombok:lombok")
     developmentOnly("org.springframework.boot:spring-boot-devtools")
     runtimeOnly("com.h2database:h2")

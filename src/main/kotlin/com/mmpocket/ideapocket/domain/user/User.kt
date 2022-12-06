@@ -15,7 +15,7 @@ class User(
     val id: UserId,
 
     param: UserParam
-): UserDetails {
+): CustomUserDetails {
     @Column(length = 36, nullable = false)
     var nickname: String = param.nickname
 
@@ -27,6 +27,12 @@ class User(
 
     @Column(nullable = false)
     var status: CommonState = CommonState.ACTIVE
+
+    override fun getClaims(): Map<String, Any> = mapOf(
+        "user_id" to id,
+        "user_name" to email,
+        "authorities" to mutableListOf<String>()
+    )
 
     override fun getAuthorities(): MutableCollection<out GrantedAuthority> {
         return mutableListOf()
