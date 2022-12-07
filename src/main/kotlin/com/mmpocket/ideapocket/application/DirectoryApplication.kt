@@ -24,24 +24,26 @@ class DirectoryApplication(
     }
 
     fun updateDirectory(id: String, param: DirectoryParam): Directory {
-        val directoryId = DirectoryId(id.toLong())
-        val directory = repository.findById(directoryId).orElseThrow { NotFoundException() }
+        val directory = getDirectoryById(id)
         directory.update(param)
         return repository.save(directory)
     }
 
     fun hideDirectory(id: String): Directory {
-        val directoryId = DirectoryId(id.toLong())
-        val directory = repository.findById(directoryId).orElseThrow { NotFoundException() }
+        val directory = getDirectoryById(id)
         directory.hide()
         return repository.save(directory)
     }
 
     fun deleteDirectory(id: String): Boolean {
-        val directoryId = DirectoryId(id.toLong())
-        val directory = repository.findById(directoryId).orElseThrow { NotFoundException() }
+        val directory = getDirectoryById(id)
         directory.delete()
         repository.save(directory)
         return true
+    }
+
+    private fun getDirectoryById(id: String): Directory {
+        val directoryId = DirectoryId(id.toLong())
+        return repository.findById(directoryId).orElseThrow { NotFoundException() }
     }
 }

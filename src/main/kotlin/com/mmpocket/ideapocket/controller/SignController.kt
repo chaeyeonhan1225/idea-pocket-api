@@ -1,8 +1,10 @@
 package com.mmpocket.ideapocket.controller
 
+import com.mmpocket.ideapocket.application.SignApplication
 import com.mmpocket.ideapocket.application.UserApplication
 import com.mmpocket.ideapocket.application.UserProvider
-import com.mmpocket.ideapocket.domain.service.JwtProvider
+import com.mmpocket.ideapocket.domain.exception.UserPasswordNotMatchedException
+import com.mmpocket.ideapocket.domain.service.authentication.JwtProvider
 import com.mmpocket.ideapocket.domain.user.User
 import com.mmpocket.ideapocket.domain.user.UserLoginParam
 import com.mmpocket.ideapocket.domain.user.UserParam
@@ -15,27 +17,13 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 @RequestMapping("v1")
 class SignController(
-    private val application: UserApplication,
-    private val provider: UserProvider,
-    private val passwordEncoder: PasswordEncoder,
-    private val jwtProvider: JwtProvider
+    private val application: SignApplication
 ) {
     @PostMapping("/sign-up")
-    fun signUp(@RequestBody param: UserParam): User {
-        val encodedPassword = passwordEncoder.encode(param.password)
-        val userParam = UserParam(nickname = param.nickname, email = param.email, password = encodedPassword)
-        return application.createUser(userParam)
-    }
+    fun signUp(@RequestBody param: UserParam): User = application.signUp(param)
 
     @PostMapping("/sign-in")
     fun signIn(@RequestBody param: UserLoginParam): String {
-        println("테스트")
-        val user = provider.findByEmail(email = param.email)
-
-        if (!passwordEncoder.matches(param.password, user.password)) {
-            throw RuntimeException()
-        }
-        println("테스트")
-        return jwtProvider.generateToken(user)
+        return application.signIn(param)
     }
 }

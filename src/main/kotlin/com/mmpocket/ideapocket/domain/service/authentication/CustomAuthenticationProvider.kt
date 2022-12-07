@@ -1,4 +1,4 @@
-//package com.mmpocket.ideapocket.domain.service
+package com.mmpocket.ideapocket.domain.service.authentication//package com.mmpocket.ideapocket.domain.service
 //
 //import com.mmpocket.ideapocket.domain.exception.UserDisabledException
 //import com.mmpocket.ideapocket.domain.exception.UserPasswordNotMatchedException

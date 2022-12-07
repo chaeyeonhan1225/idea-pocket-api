@@ -1,4 +1,4 @@
-package com.mmpocket.ideapocket.domain.service
+package com.mmpocket.ideapocket.domain.service.authentication
 
 import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.web.filter.GenericFilterBean

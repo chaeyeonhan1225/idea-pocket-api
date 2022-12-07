@@ -3,7 +3,6 @@ package com.mmpocket.ideapocket.application
 import com.mmpocket.ideapocket.domain.PagedList
 import com.mmpocket.ideapocket.domain.memo.*
 import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException
-import org.springframework.data.domain.Page
 import org.springframework.data.domain.PageRequest
 import org.springframework.stereotype.Service
 
@@ -18,7 +17,6 @@ class MemoProvider(
 
     fun findById(id: String): Memo {
         val memoId = MemoId(id.toLong())
-        val memo = repository.findById(memoId).orElseThrow { NotFoundException() }
-        return memo
+        return repository.findById(memoId).orElseThrow { NotFoundException() }
     }
 }

@@ -1,4 +1,4 @@
-package com.mmpocket.ideapocket.domain.service
+package com.mmpocket.ideapocket.domain.service.authentication
 
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration

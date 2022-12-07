@@ -1,4 +1,4 @@
-package com.mmpocket.ideapocket.domain.service
+package com.mmpocket.ideapocket.domain.service.authentication
 
 import org.springframework.security.authentication.AuthenticationManager
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken

@@ -23,17 +23,15 @@ class MemoApplication(
     }
 
     fun updateMemo(id: String, param: MemoParam): Memo {
-        val memoId = MemoId(id.toLong())
-        val memo = repository.findById(memoId).orElseThrow { NotFoundException() }
+        val memo = getMemoById(id)
         memo.update(param)
         return repository.save(memo)
     }
 
     fun moveMemoDirectory(memoId: String, directoryId: String): Memo {
-        val memoId = MemoId(memoId.toLong())
-        val directoryId = DirectoryId(directoryId.toLong())
+        val memo = getMemoById(memoId)
 
-        val memo = repository.findById(memoId).orElseThrow { NotFoundException() }
+        val directoryId = DirectoryId(directoryId.toLong())
         directoryRepository.findById(directoryId).orElseThrow { NotFoundException()  }
 
         memo.updateDirectoryId(directoryId)
@@ -41,10 +39,14 @@ class MemoApplication(
     }
 
     fun deleteMemo(id: String): Boolean {
-        val memoId = MemoId(id.toLong())
-        val memo = repository.findById(memoId).orElseThrow { NotFoundException() }
+        val memo = getMemoById(id)
         memo.delete()
         repository.save(memo)
         return true
+    }
+
+    fun getMemoById(id: String): Memo {
+        val memoId = MemoId(id.toLong())
+        return repository.findById(memoId).orElseThrow { NotFoundException() }
     }
 }

@@ -1,5 +1,6 @@
-package com.mmpocket.ideapocket.domain.service
+package com.mmpocket.ideapocket.domain.service.authentication
 
+import com.mmpocket.ideapocket.domain.service.UserDetailsService
 import io.jsonwebtoken.Claims
 import io.jsonwebtoken.Jwts
 import io.jsonwebtoken.SignatureAlgorithm
@@ -23,6 +24,7 @@ class JwtProvider(  // TODO: 이름 변경 필요
             "authorities" to user.authorities
         )
 
+        // TODO: expiration 설정 해줘야함
         return Jwts.builder()
             .setClaims(claims)
             .signWith(SignatureAlgorithm.HS256, encodedSecretKey)

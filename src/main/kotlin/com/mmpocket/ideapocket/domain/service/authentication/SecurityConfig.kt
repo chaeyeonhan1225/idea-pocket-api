@@ -1,41 +1,25 @@
-package com.mmpocket.ideapocket.domain.service
+package com.mmpocket.ideapocket.domain.service.authentication
 
 import org.springframework.context.annotation.Bean
 import org.springframework.security.authentication.AuthenticationManager
-import org.springframework.security.authentication.AuthenticationProvider
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
-import org.springframework.security.core.userdetails.UserDetailsService
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
-import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.security.web.SecurityFilterChain
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter
-import java.util.logging.Filter
 
 
 @EnableWebSecurity
 @EnableMethodSecurity
 class SecurityConfig(
-    // private val authenticationProvider: CustomAuthenticationProvider
     private val jwtProvider: JwtProvider
 ) {
-//    @Bean
-//    fun authManager(http: HttpSecurity): AuthenticationManager? {
-//        val authenticationManagerBuilder = http.getSharedObject(
-//            AuthenticationManagerBuilder::class.java
-//        )
-//        authenticationManagerBuilder.authenticationProvider(authenticationProvider)
-//        return authenticationManagerBuilder.build()
-//    }
-
     @Bean
     fun authManager(http: HttpSecurity): AuthenticationManager? {
         val authenticationManagerBuilder = http.getSharedObject(
             AuthenticationManagerBuilder::class.java
         )
-       //  authenticationManagerBuilder.authenticationProvider(jwtProvider)
         return authenticationManagerBuilder.build()
     }
 
