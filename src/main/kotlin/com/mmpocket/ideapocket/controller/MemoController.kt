@@ -26,10 +26,10 @@ class MemoController(
     private val service: MemoApplication
 ) {
     @GetMapping
-    fun findMemos(principal: Principal, @RequestParam page: Int?, @RequestParam size: Int?): PagedList<Memo> {
+    fun findMemos(principal: Principal?, @RequestParam page: Int?, @RequestParam size: Int?): PagedList<Memo> {
         println("page = $page, size = $size")
-        println("principal: ${principal.name}")
-        val userId = findUserIdByUsername(principal.name)
+        println("principal: ${principal?.name}")
+        val userId = findUserIdByUsername(principal?.name ?: "")
         return provider.findAll(userId = userId, page = page, size = size)
     }
 

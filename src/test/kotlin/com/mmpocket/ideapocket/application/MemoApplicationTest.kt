@@ -31,7 +31,8 @@ class MemoApplicationTest {
 
         val testParam = MemoParam(
             title = "테스트 메모1",
-            content = "메모 내용은 길이가 길지롱"
+            content = "메모 내용은 길이가 길지롱",
+            tags = listOf("태그1")
         )
 
         val result = memoApplication.createMemo(testParam, userId = "1")
@@ -52,7 +53,8 @@ class MemoApplicationTest {
 
         val testParam = MemoParam(
             title = "테스트 메모1",
-            content = "메모 내용은 길이가 길지롱"
+            content = "메모 내용은 길이가 길지롱",
+            tags = listOf("태그1", "태그2")
         )
 
         val result = memoApplication.createMemo(testParam, userId = "1")
@@ -67,7 +69,8 @@ class MemoApplicationTest {
 
         val updateParam = MemoParam(
             title = "테스트 메모 - 수정",
-            content = "메모 내용을 수정해보자"
+            content = "메모 내용을 수정해보자",
+            tags = listOf("태그1")
         )
 
         val updateResult = memoApplication.updateMemo(result.id.value.toString(), updateParam)
@@ -87,7 +90,8 @@ class MemoApplicationTest {
 
         val testParam = MemoParam(
             title = "테스트 메모1",
-            content = "메모 내용은 길이가 길지롱"
+            content = "메모 내용은 길이가 길지롱",
+            tags = listOf("태그1")
         )
 
         val result = memoApplication.createMemo(testParam, userId = "1")

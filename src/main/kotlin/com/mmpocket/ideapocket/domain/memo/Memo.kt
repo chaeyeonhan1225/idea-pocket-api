@@ -32,6 +32,10 @@ class Memo(
     @Column(nullable = false)
     var status: CommonState = CommonState.ACTIVE
 
+    @OneToMany(fetch = FetchType.LAZY, cascade = [CascadeType.MERGE])
+    @JoinColumn(name = "memoId")
+    var tags: List<Tag> = param.tags.map { Tag(tag = it) }
+
     fun update(param: MemoParam) {
         title = param.title
         content = param.content
